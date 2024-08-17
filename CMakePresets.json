@@ -1,43 +1,56 @@
 {
-    "version": 9,
+    "version": 6,
     "cmakeMinimumRequired": {
         "major": 3,
-        "minor": 30,
-        "patch": 1
+        "minor": 23,
+        "patch": 0
     },
     "configurePresets": [
         {
-            "name": "debug-windows",
+            "name": "windows-base",
+            "hidden": true,
             "generator": "Ninja",
-            "binaryDir": "build",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "installDir": "${sourceDir}/install/${presetName}",
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "clang++",
-                "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "true",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": true,
                 "CMAKE_LINKER": "lld"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
             }
         },
         {
-            "name": "release-windows",
-            "generator": "Ninja",
-            "binaryDir": "build",
+            "name": "windows-debug",
+            "inherits": "windows-base",
+            "displayName": "Windows Debug",
             "cacheVariables": {
-                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "windows-release",
+            "inherits": "windows-base",
+            "displayName": "Windows Release",
+            "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "true",
-                "CMAKE_LINKER": "lld",
-                "CMAKE_CXX_FLAGS": "-Ofast -ffast-math -flto -march=native -mtune=native -msse2 -mavx -fstack-protector -g -Wall"
+                "CMAKE_CXX_FLAGS": "-O3 -march=native -mtune=native -Wall -Wextra -Wpedantic"
             }
         }
     ],
     "buildPresets": [
         {
-            "name": "debug-windows",
-            "configurePreset": "debug-windows"
+            "name": "windows-debug",
+            "configurePreset": "windows-debug",
+            "displayName": "Debug"
         },
         {
-            "name": "release-windows",
-            "configurePreset": "release-windows"
+            "name": "windows-release",
+            "configurePreset": "windows-release",
+            "displayName": "Release"
         }
     ]
 }

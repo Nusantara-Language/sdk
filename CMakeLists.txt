@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.30.1)
 
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 project(
     nusantara
     VERSION 1.0.0
@@ -10,16 +7,22 @@ project(
     LANGUAGES CXX
 )
 
-include_directories("include")
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-file(
-    GLOB_RECURSE
-    SRC_FILES
-    "src/**/*.cc"
+add_executable(nusantara)
+
+target_include_directories(nusantara PRIVATE include)
+
+file(GLOB_RECURSE SRC_FILES
     "src/*.cc"
 )
 
-add_executable(
-    nusantara
-    ${SRC_FILES}
+target_sources(nusantara PRIVATE ${SRC_FILES})
+
+set_target_properties(nusantara PROPERTIES
+    CXX_STANDARD 23
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
 )

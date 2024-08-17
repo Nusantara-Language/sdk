@@ -1,6 +1,5 @@
 CompileFlags:
   Add: [-Wall, -Wextra, -Wpedantic, -std=c++20]
-  Remove: [-W*]
 
 Diagnostics:
   ClangTidy:
@@ -27,3 +26,32 @@ If:
   PathMatch: .*\.hpp
 CompileFlags:
   Add: [-Wno-unused-function]
+
+---
+If:
+  PathMatch: .*
+CompileFlags:
+  Add: [-fdiagnostics-color=always]
+
+Style:
+  ColumnLimit: 100
+  UseTab: Never
+  IndentWidth: 2
+  BreakBeforeBraces: Attach
+  AllowShortFunctionsOnASingleLine: Empty
+  PointerAlignment: Left
+  AccessModifierOffset: -2
+
+Diagnostics:
+  SuppressWarnings: []
+
+Completion:
+  AllScopes: Yes
+  DetailLevel: Detailed
+
+Hover:
+  IncludeDeclaration: Yes
+
+Format:
+  TabWidth: 2
+  IndentWidth: 2

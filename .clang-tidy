@@ -7,10 +7,13 @@ Checks: >
   -abseil-*,
   -modernize-use-trailing-return-type,
   -llvm-*,
-  -llvmlibc-*
+  -llvmlibc-*,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-pro-type-vararg,
+  -hicpp-vararg
 
-WarningsAsErrors: ''
-HeaderFilterRegex: ''
+WarningsAsErrors: '*'
+HeaderFilterRegex: '.*'
 AnalyzeTemporaryDtors: false
 FormatStyle: file
 CheckOptions:
@@ -36,8 +39,6 @@ CheckOptions:
     value: 3
   - key: readability-function-cognitive-complexity.Threshold
     value: 25
-  - key: cppcoreguidelines-avoid-magic-numbers.IgnoredIntegerValues
-    value: '1;2;3;4;'
   - key: cppcoreguidelines-no-malloc.Allocations
     value: '::malloc;::calloc'
   - key: cppcoreguidelines-no-malloc.Deallocations
@@ -52,3 +53,17 @@ CheckOptions:
     value: true
   - key: modernize-use-nullptr.NullMacros
     value: 'NULL'
+  - key: readability-magic-numbers.IgnoredIntegerValues
+    value: '1;2;3;4;'
+  - key: readability-implicit-bool-conversion.AllowIntegerConditions
+    value: true
+  - key: readability-implicit-bool-conversion.AllowPointerConditions
+    value: true
+  - key: performance-faster-string-find.StringLikeClasses
+    value: 'std::basic_string'
+  - key: performance-for-range-copy.WarnOnAllAutoCopies
+    value: true
+  - key: readability-redundant-member-init.IgnoreBaseInCopyConstructors
+    value: true
+  - key: modernize-use-default-member-init.UseAssignment
+    value: true
